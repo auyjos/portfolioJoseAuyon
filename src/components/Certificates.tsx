@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+
 // Import all images
 import problemSolvingInt from "../assets/images/problemsolvingint.png";
 import jsInt from "../assets/images/jsint.png";
@@ -15,13 +15,9 @@ import "../assets/styles/Certificates.scss";
 
 function Certificates() {
 
-    const [isLightMode, setIsLightMode] = useState(false); // State to toggle light mode
-
-    // Function to toggle light mode
-    const toggleLightMode = () => setIsLightMode(!isLightMode);
 
     return (
-        <div className={`certifications-container ${isLightMode ? 'light-mode' : ''}`} id="credentials">
+        <div className='certifications-container' id="credentials">
             <h1>Credentials</h1>
             <div className="certifications-grid">
                 <div className="certification">
