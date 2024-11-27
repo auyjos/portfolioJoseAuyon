@@ -31,6 +31,7 @@ function Timeline() {
           >
           
             <h3 className="vertical-timeline-element-title">Fullstack Developer</h3>
+            <p>mar. 2023 - nov. 2023</p>
             <h4 className="vertical-timeline-element-subtitle">Guatemala</h4>
           
             <p>
