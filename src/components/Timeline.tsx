@@ -31,8 +31,8 @@ function Timeline() {
           >
           
             <h3 className="vertical-timeline-element-title">Fullstack Developer</h3>
-            <p>mar. 2023 - nov. 2023</p>
             <h4 className="vertical-timeline-element-subtitle">Guatemala</h4>
+            <p>mar. 2023 - nov. 2023</p>
           
             <p>
             Designed and developed an application for the operational and data management of an avian farm. Implemented an API for efficient data management using React Native (frontend) and Flask (backend). Configured the database hosted on an AWS server. Participated in all stages of the project, including design, development, quality assurance (QA) testing, and deployment. A notable achievement was the significant reduction in economic losses due to optimized data management.
