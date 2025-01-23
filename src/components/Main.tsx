@@ -2,8 +2,14 @@ import React from "react";
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import '../assets/styles/Main.scss';
+
 import portofoliophoto1 from '../assets/images/portofoliophoto1.jpg'  
+
+
 function Main() {
+
+ 
+
 
   return (
     <div className="container">
@@ -28,6 +34,15 @@ function Main() {
               I love tackling challenging problems and continuously learning to stay up-to-date with the latest industry trends.
             </p>
           </div>
+
+          <div className="pdf-section">
+        
+            <a href={require('../_someFolder/JoseAuyonEspanol.pdf')} target="_blank" rel="noreferrer">CV Español</a>
+            <div>
+            <a href={require('../_someFolder/JoseAuyonIngles.pdf')} target="_blank" rel="noreferrer">CV Inglés</a>
+            </div>
+          </div>
+
 
           <div className="mobile_social_icons">
             <a href="https://github.com/auyjos" target="_blank" rel="noreferrer"><GitHubIcon/></a>
