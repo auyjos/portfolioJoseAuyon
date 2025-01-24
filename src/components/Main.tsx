@@ -1,6 +1,7 @@
 import React from "react";
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import EmailIcon from '@mui/icons-material/Email';
 import '../assets/styles/Main.scss';
 
 import portofoliophoto1 from '../assets/images/portofoliophoto1.jpg'  
@@ -23,6 +24,8 @@ function Main() {
           <div className="social_icons">
             <a href="https://github.com/auyjos" target="_blank" rel="noreferrer"><GitHubIcon/></a>
             <a href="https://www.linkedin.com/in/jose-auyon/" target="_blank" rel="noreferrer"><LinkedInIcon/></a>
+            <a href="mailto:auyon.joseandres@gmail.com" target="_blank" rel="noreferrer"><EmailIcon /></a>
+
           </div>
           <h1>José Auyón</h1>
           <p>Full Stack Engineer</p>
@@ -47,8 +50,9 @@ function Main() {
           <div className="mobile_social_icons">
             <a href="https://github.com/auyjos" target="_blank" rel="noreferrer"><GitHubIcon/></a>
             <a href="https://www.linkedin.com/in/jose-auyon/" target="_blank" rel="noreferrer"><LinkedInIcon/></a>
+            <a href="mailto:auyon.joseandres@gmail.com" target="_blank" rel="noreferrer"><EmailIcon /></a>
+            </div>
           </div>
-        </div>
       </div>
     </div>
   );

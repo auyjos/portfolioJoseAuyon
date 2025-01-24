@@ -37,7 +37,7 @@ function App() {
             <Timeline/>
             <Project/>
             <Certificates /> 
-            <Contact/>
+            
         </FadeIn>
         <Footer />
     </div>

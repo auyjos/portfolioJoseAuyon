@@ -40,9 +40,15 @@ label {
 
 form {
   width: 100% !important;
+  color: #050f0b;
 }
 
 .body-form {
   width: 100% !important;
   margin-bottom: 15px !important;
 }
+input,
+  textarea,
+  select {
+    color: #050f0b !important; /* Override default styles */
+  }
