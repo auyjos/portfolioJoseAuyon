@@ -4,7 +4,6 @@ import {
   Timeline,
   Expertise,
   Project,
-  Contact,
   Navigation,
   Footer,
   Certificates
