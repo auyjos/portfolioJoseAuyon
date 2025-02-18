@@ -42,7 +42,7 @@ function Main() {
         
             <a href={require('../_someFolder/JoseAuyonEspanol.pdf')} target="_blank" rel="noreferrer">CV Español</a>
             <div>
-            <a href={require('../_someFolder/JoseAuyonIngles.pdf')} target="_blank" rel="noreferrer">CV Inglés</a>
+            <a href={require('../_someFolder/JoseAuyonIngles.pdf')} target="_blank" rel="noreferrer">CV English</a>
             </div>
           </div>
 
