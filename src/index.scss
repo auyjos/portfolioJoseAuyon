@@ -15,8 +15,8 @@ code {
 
 .main-container {
   position: relative;
-  background-color: #0d1116;
-
+  background-color: #0d1116; /* Dark mode background color */
+  z-index: 1; /* Ensures content is on top of background */
 }
 
 .background-wrapper {
@@ -30,24 +30,17 @@ code {
   background-attachment: fixed;
   background-position: center;
   z-index: -1; /* Ensures it's behind the content */
+  background-image: url("./assets/images/bg-dark.png"); /* Dark mode background image */
 }
 
-/* For Dark Mode */
-.main-container {
-  position: relative;
-  background-color: #0d1116; /* Dark mode background color */
-  z-index: 1; /* Ensures content is on top of background */
+.dark-mode .background-wrapper {
+  background-image: url("./assets/images/bg-dark.png"); /* Dark mode background image */
 }
-
 /* For Light Mode */
 .light-mode .background-wrapper {
   background-image: url("./assets/images/bg-light.png"); /* Light mode background image */
 }
 
-/* For Dark Mode */
-.background-wrapper {
-  background-image: url("../src/assets/images/bg-dark.png"); /* Dark mode background image */
-}
 
 a {
   text-decoration: none;
@@ -193,8 +186,9 @@ p, a, h1, h2, h3, h4, h5, label, button {
         transform: scale(1.05);
         transition: transform 0.2s ease-in-out;
     }
-}
+  }
 
+ 
 }
 
 
@@ -205,4 +199,11 @@ p, a, h1, h2, h3, h4, h5, label, button {
       padding: 5% 5%;
     }
   }
+}
+
+/* index.scss (or a dedicated ScrollReveal.scss) */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(25px);
+  will-change: transform, opacity;
 }

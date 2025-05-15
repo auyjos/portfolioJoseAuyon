@@ -1,0 +1,13 @@
+/* global or BackgroundFx.scss */
+.background-fx {
+  position: fixed;
+  inset: 0;
+  z-index: -1;          // below everything else
+  pointer-events: none; // don’t steal clicks
+  overflow: hidden;
+}
+
+.main-container {
+  position: relative;   // creates its own stacking context
+  z-index: 0;           // sits above the background layer
+}

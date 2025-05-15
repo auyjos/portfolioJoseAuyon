@@ -1,3 +1,9 @@
+.project{
+    opacity: 0;
+    transform: translateY(30px);
+    will-change: transform, opacity;
+}
+
 .projects-container {
     display: flex;
     flex-direction: column;

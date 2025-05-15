@@ -2,6 +2,44 @@
     background-color: rgba(0, 0, 0, 0.2);
 }
 
+.background-wrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: radial-gradient(circle at 20% 30%, #1a1d42 0%, #0d0e1f 80%);
+  z-index: -1;
+  opacity: 0;
+  transform: scale(1.15);
+}
+
+.rounded-image {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  opacity: 0;      
+  box-shadow: 0 0 20px rgba(33, 150, 243, 0.3);
+  position: relative;
+  z-index: 2;
+  border: 1px solid #083a62;
+}
+
+.social_icons a svg,
+.mobile_social_icons a svg {
+  font-size: 1.9rem;
+  cursor: pointer;
+  opacity: 0;
+  position: relative;
+  z-index: 2;
+}
+
+.content h1,
+.content > p {
+  opacity: 0;
+}
+
 .about-section {
     display: flex;
     gap: 30px;
@@ -10,39 +48,36 @@
     width: 100%;
     padding: 0px 15%;
     min-height: 700px;
-}
+    position: relative;
 
-.rounded-image {
-    width: 150px; /* Circular frame width */
-    height: 150px; /* Circular frame height */
-    border-radius: 50%; /* Makes the frame circular */
-    object-fit: cover; /* Ensures the image scales properly within the circle */
-    object-position: 0px -0px; /* Adjusts the position of the image within the frame */
-    border: 2px solid #ccc; /* Optional: Add a border */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: Add a shadow */
-  }
-  
-  .about-me {
+    .content {
+        h1, > p {
+            opacity: 0;
+            position: relative;
+            z-index: 2;
+        }
+    }
+}  
+
+.about-me {
+    position: relative;
+    z-index: 100;
     font-size: 1rem;
-    color: #333;
     margin-top: 20px;
     line-height: 1.6;
-  }
-  
-  .about-me p {
+    opacity: 0;
+}
+
+.about-me p {
     margin-bottom: 15px;
-  }
-  
-
-.about-section .content {
-    text-align: left;
-    z-index: 2;
-
+    position: relative;
     .social_icons {
         display: flex;
         flex-direction: row;
         gap: 10px;
-        color: white;
+        color: inherit;
+        position: relative;
+        z-index: 2;
 
         svg {
             font-size: 1.8em;
@@ -74,11 +109,7 @@
     }
 }
 
-.about p {
-    text-align: center;
-    padding-top: 30%;
-    padding-bottom: 30%;
-}
+
 
 .pdf-section {
     display: flex;
@@ -87,7 +118,8 @@
     justify-content: center;
     padding: 40px 15%;
     width: 100%;
-
+     opacity: 0;            // let anime reveal it
+    transform: translateY(10px);
     a{
         text-decoration: none;
         font-size: 20px;

@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useRef } from 'react';
+import { animate, createTimeline } from 'animejs';
 import edaproject from '../assets/images/edaproject.png'
 import neuralnetwork from '../assets/images/neuralscreenshot.png'
 import xmppimage from '../assets/images/xmppchat.png'
@@ -9,10 +10,42 @@ import covidHunt from '../assets/images/covidhunt.png'
 import '../assets/styles/Project.scss';
 
 function Project() {
+     const gridRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const grid = gridRef.current!;
+    const cards = Array.from(grid.querySelectorAll('.project'));
+
+    /* Observer fires once per card (rootMargin gives a little head-room) */
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries
+          .filter((e) => e.isIntersecting)
+          .forEach((entry) => {
+            const el = entry.target as HTMLElement;
+
+            /* build a one-off timeline for this card */
+            createTimeline()
+              .add(el, {
+                opacity: [0, 1],
+                translateY: [30, 0],
+                easing: 'easeOutExpo',
+                duration: 700,
+              })
+              .then(() => observer.unobserve(el));
+          });
+      },
+      { threshold: 0.15, rootMargin: '0px 0px -10% 0px' }
+    );
+
+    cards.forEach((c) => observer.observe(c));
+    return () => observer.disconnect();
+  }, []);
+
     return(
     <div className="projects-container" id="projects">
         <h1>Personal Projects</h1>
-        <div className="projects-grid">
+        <div  ref={gridRef} className="projects-grid">
             <div className="project">
                 <a href="https://github.com/auyjos/Proyecto1DS.git" target="_blank" rel="noreferrer"><img src={edaproject} className="zoom" alt="thumbnail" width="100%"/></a>
                 <a href="https://github.com/auyjos/Proyecto1DS.git" target="_blank" rel="noreferrer"><h2>EDA Generator</h2></a>

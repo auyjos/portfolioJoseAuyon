@@ -9,7 +9,7 @@ import {
   Certificates
 } from "./components";
 import FadeIn from './components/FadeIn';
-
+import useScrollReveal from "./hooks/useScrollReveal";
 import './index.scss';
 
 function App() {
@@ -23,12 +23,14 @@ function App() {
         }
     }
 
+    useScrollReveal();    
     useEffect(() => {
         window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
       }, []);
 
     return (
     <div className={`main-container ${mode === 'dark' ? 'dark-mode' : 'light-mode'}`}>
+        
         <Navigation parentToChild={{mode}} modeChange={handleModeChange}/>
         <FadeIn transitionDuration={700}>
             <Main/>
