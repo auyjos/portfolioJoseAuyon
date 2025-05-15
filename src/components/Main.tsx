@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from "react";
+import React, {useEffect} from "react";
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import EmailIcon from '@mui/icons-material/Email';
@@ -7,7 +7,7 @@ import { createTimeline, animate, stagger } from "animejs";   // ← Anime v4 na
 
 import portfolio_img from '../assets/images/portfolio_img.jpg'  
 
-type AnimeInstance = ReturnType<typeof createTimeline>;
+
 function Main() {
 
    useEffect(() => {
