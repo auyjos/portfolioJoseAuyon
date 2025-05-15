@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { animate, createTimeline } from 'animejs';
+import {  createTimeline } from 'animejs';
 import edaproject from '../assets/images/edaproject.png'
 import neuralnetwork from '../assets/images/neuralscreenshot.png'
 import xmppimage from '../assets/images/xmppchat.png'
