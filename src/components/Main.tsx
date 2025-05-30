@@ -4,8 +4,7 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import EmailIcon from '@mui/icons-material/Email';
 import '../assets/styles/Main.scss';
 import { createTimeline, animate, stagger } from "animejs";   // ← Anime v4 named exports
-
-import portfolio_img from '../assets/images/portfolio_img.jpg'  
+import { portfolioImg } from '../assets/images';
 
 
 function Main() {
@@ -71,9 +70,8 @@ function Main() {
     <div className="container">
     <div className="background-wrapper"></div>
 
-      <div className="about-section">
-        <div className="image-wrapper">
-        <img src={portfolio_img} alt="Avatar" className="rounded-image" />
+      <div className="about-section">        <div className="image-wrapper">
+        <img src={portfolioImg} alt="Avatar" className="rounded-image" />
         </div>
         <div className="content">
           <div className="social_icons">

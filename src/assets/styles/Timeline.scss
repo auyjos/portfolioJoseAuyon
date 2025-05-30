@@ -1,22 +1,135 @@
+// Timeline container with enhanced styling
+#history {
+    position: relative;
+}
+
+.items-container {
+    h1 {
+        text-align: center;
+        margin-bottom: 3rem;
+        background: linear-gradient(45deg, #e0e2e9 0%, #f3f2f3 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        font-size: 2.5rem;
+        font-weight: bold;
+        opacity: 0;
+        transform: translateY(30px);
+        animation: fadeInUp 0.8s ease forwards;
+    }
+}
+
+// Enhanced timeline elements with modern effects
+.vertical-timeline-element {
+    opacity: 0;
+    transform: translateY(50px);
+    animation: slideInTimeline 0.8s ease forwards;
+    
+    &:nth-child(1) { animation-delay: 0.2s; }
+    &:nth-child(2) { animation-delay: 0.4s; }
+    &:nth-child(3) { animation-delay: 0.6s; }
+    &:nth-child(4) { animation-delay: 0.8s; }
+}
+
+// Enhanced content cards
+.vertical-timeline-element-content {
+    position: relative;
+    background: rgba(255, 255, 255, 0.95) !important;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border-radius: 12px !important;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+        transition: left 0.6s ease;
+        z-index: 1;
+    }
+    
+    &:hover {
+        transform: translateY(-5px) scale(1.02);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15) !important;
+        border-color: rgba(102, 126, 234, 0.3);
+        
+        &::before {
+            left: 100%;
+        }
+    }
+}
+
+// Enhanced timeline icons
+.vertical-timeline-element-icon {
+    transition: all 0.3s ease;
+    border: 3px solid #5000ca !important;
+    
+    &:hover {
+        transform: scale(1.1) rotate(5deg);
+        box-shadow: 0 0 20px rgba(80, 0, 202, 0.4);
+    }
+}
+
+// Enhanced text styling
 .vertical-timeline span {
     color: white;
     font-family: 'Courier Prime', monospace;
 }
 
-.vertical-timeline p {
-    color: rgb(39, 40, 34);
-}
-
-.vertical-timeline-element p {
-    color: rgb(39, 40, 34);
-}
-
 .vertical-timeline-element h3 {
-    color: rgb(39, 40, 34);
+    color: rgb(39, 40, 34) !important;
+    background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: bold;
+    position: relative;
+    z-index: 2;
+    transition: all 0.3s ease;
+    
+    &:hover {
+        transform: scale(1.05);
+    }
 }
 
 .vertical-timeline-element h4 {
-    color: rgb(39, 40, 34);
+    color: rgb(80, 80, 80) !important;
+    font-weight: 600;
+    position: relative;
+    z-index: 2;
+    transition: color 0.3s ease;
+    
+    .vertical-timeline-element-content:hover & {
+        color: rgb(102, 126, 234) !important;
+    }
+}
+
+.vertical-timeline-element p {
+    color: rgb(39, 40, 34) !important;
+    line-height: 1.6;
+    position: relative;
+    z-index: 2;
+    transition: all 0.3s ease;
+    
+    strong {
+        background: linear-gradient(45deg, rgba(102, 126, 234, 0.2), rgba(118, 75, 162, 0.2));
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        
+        &:hover {
+            background: linear-gradient(45deg, rgba(102, 126, 234, 0.3), rgba(118, 75, 162, 0.3));
+            transform: scale(1.02);
+        }
+    }
 }
 
 .vertical-timeline-element span {
@@ -24,15 +137,106 @@
 }
 
 .vertical-timeline-element .vertical-timeline-element-date {
-    color: rgb(11, 10, 10);
+    color: rgb(11, 10, 10) !important;
+    font-weight: 600;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 8px 16px;
+    border-radius: 20px;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(102, 126, 234, 0.2);
+    transition: all 0.3s ease;
+    
+    &:hover {
+        background: rgba(102, 126, 234, 0.1);
+        transform: scale(1.05);
+        box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
+    }
 }
 
 .svg-inline--fa {
     color: white;
+    transition: all 0.3s ease;
 }
 
+// Enhanced timeline line
+.vertical-timeline::before {
+    background: linear-gradient(to bottom, #667eea, #764ba2) !important;
+    width: 4px !important;
+    box-shadow: 0 0 10px rgba(102, 126, 234, 0.3);
+}
+
+// Keyframe animations
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInTimeline {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+// Responsive design
 @media screen and (max-width: 1170px) {
     .vertical-timeline-element .vertical-timeline-element-date {
-        color: rgb(0, 0, 0);
+        color: rgb(0, 0, 0) !important;
+        position: relative;
+        margin-top: 10px;
+    }
+    
+    .vertical-timeline-element-content:hover {
+        transform: translateY(-3px) scale(1.01);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .items-container h1 {
+        font-size: 2rem;
+    }
+    
+    .vertical-timeline-element-content {
+        margin-left: 0 !important;
+        
+        &:hover {
+            transform: scale(1.01);
+        }
+    }
+}
+
+// Light mode support
+.light-mode {
+    .vertical-timeline-element-content {
+        background: rgba(255, 255, 255, 0.9) !important;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08) !important;
+        
+        &:hover {
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12) !important;
+            border-color: rgba(102, 126, 234, 0.3);
+        }
+    }
+    
+    .vertical-timeline-element .vertical-timeline-element-date {
+        background: rgba(255, 255, 255, 0.95);
+        color: rgba(0, 0, 0, 0.8) !important;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        
+        &:hover {
+            background: rgba(102, 126, 234, 0.1);
+            color: rgba(0, 0, 0, 0.9) !important;
+        }
     }
 }

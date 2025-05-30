@@ -1,97 +1,345 @@
+// Enhanced Expertise section with modern design patterns
 .skills-container {
     padding: 5% 10%;
     display: flex;
     flex-direction: column;
     text-align: left;
+    position: relative;
+
+    // Enhanced title with gradient styling
+    h1 {
+        text-align: center;
+        margin-bottom: 3rem;
+        background: linear-gradient(45deg, #f2f2f3 0%, #eeecf0 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        font-size: 2.5rem;
+        font-weight: bold;
+        opacity: 0;
+        transform: translateY(30px);
+        animation: fadeInUp 0.8s ease forwards;
+    }
 
     svg {
         color: white;
+        transition: all 0.3s ease;
+        
+        &:hover {
+            transform: scale(1.1) rotate(5deg);
+            filter: drop-shadow(0 0 10px rgba(102, 126, 234, 0.4));
+        }
     }
 }
 
-
-/* Default color (for normal mode) */
-.highlight-list li {
-    color: white; /* White text for normal mode */
-  }
-  
-  /* For Light Mode - Change text color to black */
-  .light-mode .highlight-list li {
-    color: black; /* Black text for light mode */
-    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7); /* Adds a dark shadow to the text */
-  }
-
+// Enhanced skills grid with modern card effects
 .skills-container .skills-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 50px;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 40px;
+    perspective: 1000px;
 }
-  
+
+// Modern skill cards with glassmorphism effect
 .skills-container .skills-grid .skill {
+    opacity: 0;
+    transform: translateY(30px);
+    will-change: transform, opacity;
     align-items: center;
     text-align: left;
+    border-radius: 12px;
+    padding: 24px;
+    background: rgba(255, 255, 255, 0.05);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    
+    // Light sweep effect
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+        transition: left 0.6s ease;
+        z-index: 1;
+    }
+    
+    &:hover {
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        border-color: rgba(102, 126, 234, 0.3);
+        
+        &::before {
+            left: 100%;
+        }
+    }
+    
+    // Enhanced typography
+    h3 {
+        background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin: 1rem 0;
+        transition: all 0.3s ease;
+        font-size: 1.4rem;
+        font-weight: bold;
+        position: relative;
+        z-index: 2;
+        
+        &:hover {
+            transform: scale(1.02);
+        }
+    }
+    
+    p {
+        line-height: 1.6;
+        color: rgba(255, 255, 255, 0.8);
+        margin: 1rem 0;
+        position: relative;
+        z-index: 2;
+    }
 }
-  
+
+// Enhanced highlight list styling
+.highlight-list {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+    position: relative;
+    z-index: 2;
+    
+    li {
+        color: rgba(255, 255, 255, 0.8);
+        padding: 8px 0;
+        padding-left: 20px;
+        position: relative;
+        transition: all 0.3s ease;
+        
+        &::before {
+            content: '▶';
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+        }
+        
+        &:hover {
+            color: rgba(255, 255, 255, 0.95);
+            transform: translateX(5px);
+            
+            &::before {
+                color: #764ba2;
+                transform: scale(1.2);
+            }
+        }
+    }
+}
+
+// Enhanced chip styling
 .chip {
-    color: rgb(39, 40, 34) !important;
-    background-color: white !important;
+    background: linear-gradient(45deg, rgba(102, 126, 234, 0.2), rgba(118, 75, 162, 0.2)) !important;
+    border: 1px solid rgba(102, 126, 234, 0.3) !important;
+    color: rgba(255, 255, 255, 0.9) !important;
     font-size: 0.8rem !important;
-    height: 25px !important;
-  
+    height: 28px !important;
+    transition: all 0.3s ease !important;
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+    
+    &:hover {
+        background: linear-gradient(45deg, rgba(102, 126, 234, 0.4), rgba(118, 75, 162, 0.4)) !important;
+        transform: translateY(-2px) scale(1.05) !important;
+        box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3) !important;
+    }
+
     span {
         font-family: 'Courier Prime', monospace;
-        color: rgb(39, 40, 34);
+        color: rgba(255, 255, 255, 0.9) !important;
+        font-weight: 500;
     }
-  
+
     svg {
         height: 15px !important;
+        color: rgba(255, 255, 255, 0.9) !important;
     }
 }
 
 .flex-chips {
     line-height: 2;
-    margin: 0.5;
+    margin: 1rem 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    position: relative;
+    z-index: 2;
 
     .chip-title {
-        color: white;
-        padding-right: 10px;
+        color: rgba(255, 255, 255, 0.9);
+        font-weight: 600;
+        margin-right: 10px;
+        background: linear-gradient(45deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+        padding: 6px 12px;
+        border-radius: 8px;
+        border: 1px solid rgba(102, 126, 234, 0.2);
+        transition: all 0.3s ease;
+        
+        &:hover {
+            background: linear-gradient(45deg, rgba(102, 126, 234, 0.2), rgba(118, 75, 162, 0.2));
+            transform: scale(1.05);
+        }
     }
 }
 
-.flex-chips .MuiChip-root {
-    margin-right: 0.5em;
+// Staggered animation delays
+.skill:nth-child(1) { animation: slideInSkill 0.8s ease forwards; animation-delay: 0.1s; }
+.skill:nth-child(2) { animation: slideInSkill 0.8s ease forwards; animation-delay: 0.2s; }
+.skill:nth-child(3) { animation: slideInSkill 0.8s ease forwards; animation-delay: 0.3s; }
+.skill:nth-child(4) { animation: slideInSkill 0.8s ease forwards; animation-delay: 0.4s; }
+
+// Keyframe animations
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-.flex-chips .MuiChip-outlined {
-    background-color: #e0e0e0;
-    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-        monospace;
+@keyframes slideInSkill {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-.flex-chips .MuiChip-outlined span {
-    color: rgb(39, 40, 34);
+// Responsive design
+@media (max-width: 1200px) {
+    .skills-container .skills-grid {
+        grid-template-columns: 1fr;
+        grid-gap: 30px;
+    }
 }
 
-@media screen {
-    @media (max-width: 768px) {
-        .skills-container {
-            display: block;
-            padding-left: 5%;
-            padding-right: 5%;
-        }
+@media screen and (max-width: 768px) {
+    .skills-container {
+        padding: 5% 5%;
+    }
     
-        .skills-container .skills-grid {
-            display: initial;
+    .skills-container h1 {
+        font-size: 2rem;
+    }
+    
+    .skills-container .skills-grid {
+        grid-gap: 20px;
+    }
+    
+    .skills-container .skills-grid .skill {
+        padding: 20px;
+        
+        &:hover {
+            transform: translateY(-4px) scale(1.01);
+        }
+    }
+}
+
+@media (max-width: 567px) {
+    .skills-container h1 {
+        font-size: 1.8rem;
+    }
+    
+    .skills-container .skills-grid .skill {
+        padding: 16px;
+    }
+}
+
+// Light mode adaptive styling
+.light-mode {
+    .skills-container {
+        svg {
+            color: #0d1116;
+            
+            &:hover {
+                filter: drop-shadow(0 0 10px rgba(102, 126, 234, 0.6));
+            }
+        }
+    }
+    
+    .skills-container .skills-grid .skill {
+        background: rgba(255, 255, 255, 0.9);
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        
+        &::before {
+            background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.03), transparent);
         }
         
-        .skills-container .skills-grid .skill {
-            padding-bottom: 5%;
+        &:hover {
+            background: rgba(255, 255, 255, 0.95);
+            border-color: rgba(102, 126, 234, 0.3);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+        }
+        
+        p {
+            color: rgba(0, 0, 0, 0.7);
         }
     }
-
-    @media (max-width: 567px) {
-        .skills {
-            font-size: 12px;
+    
+    .highlight-list li {
+        color: rgba(0, 0, 0, 0.7);
+        
+        &:hover {
+            color: rgba(0, 0, 0, 0.9);
+        }
+        
+        &::before {
+            color: #667eea;
+        }
+    }
+    
+    .chip {
+        background: rgba(102, 126, 234, 0.1) !important;
+        border: 1px solid rgba(102, 126, 234, 0.2) !important;
+        color: rgba(0, 0, 0, 0.8) !important;
+        
+        &:hover {
+            background: rgba(102, 126, 234, 0.2) !important;
+            color: rgba(0, 0, 0, 0.9) !important;
+            box-shadow: 0 3px 10px rgba(102, 126, 234, 0.2) !important;
+        }
+        
+        span {
+            color: rgba(0, 0, 0, 0.8) !important;
+        }
+        
+        svg {
+            color: rgba(0, 0, 0, 0.8) !important;
+        }
+    }
+    
+    .flex-chips .chip-title {
+        color: rgba(0, 0, 0, 0.8);
+        background: rgba(102, 126, 234, 0.1);
+        border: 1px solid rgba(102, 126, 234, 0.2);
+        
+        &:hover {
+            background: rgba(102, 126, 234, 0.2);
+            color: rgba(0, 0, 0, 0.9);
         }
     }
 }
