@@ -5,6 +5,8 @@ import EmailIcon from '@mui/icons-material/Email';
 import '../assets/styles/Main.scss';
 import { createTimeline, animate, stagger } from "animejs";   // ← Anime v4 named exports
 import { portfolioImg } from '../assets/images';
+import cvEspanol from '../_someFolder/JoseAuyonEspanol.pdf';
+import cvEnglish from '../_someFolder/CVEnglishJoseAuyon.pdf';
 
 
 function Main() {
@@ -93,9 +95,9 @@ function Main() {
 
           <div className="pdf-section">
         
-            <a href={require('../_someFolder/JoseAuyonEspanol.pdf')} target="_blank" rel="noreferrer">CV Español</a>
+            <a href={cvEspanol} target="_blank" rel="noreferrer">CV Español</a>
             <div>
-            <a href={require('../_someFolder/CVEnglishJoseAuyon.pdf')} target="_blank" rel="noreferrer">CV English</a>
+            <a href={cvEnglish} target="_blank" rel="noreferrer">CV English</a>
             </div>
           </div>
 
