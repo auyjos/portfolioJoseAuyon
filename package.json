@@ -30,7 +30,7 @@
     "test": "playwright test",
     "test:ui": "playwright test --ui",
     "remotion:preview": "remotion preview src/remotion/index.ts",
-    "remotion:render": "remotion render src/remotion/index.ts HeroIntro src/assets/videos/hero-intro.webm"
+    "remotion:render": "remotion render src/remotion/index.ts HeroIntro src/assets/videos/hero-intro.webm --codec=vp9 --crf=10 --scale=2"
   },
   "browserslist": {
     "production": [

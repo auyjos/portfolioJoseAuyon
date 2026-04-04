@@ -4,6 +4,7 @@
 .timeline-section {
   @include section-padding;
   position: relative;
+  overflow: hidden;
 
   .timeline-scene {
     position: absolute;
@@ -17,236 +18,384 @@
     z-index: 1;
   }
 
-  .timeline {
+  .timeline-subtitle {
+    text-align: center;
+    color: $text-dark-secondary;
+    font-size: 1rem;
+    margin-bottom: 64px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+
+    .light-mode & { color: $text-light-secondary; }
+  }
+}
+
+/* ── Track ────────────────────────────────────────────────── */
+.timeline-track {
+  position: relative;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding-bottom: 48px;
+}
+
+/* Vertical line (static background) */
+.tl-line {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: rgba($gradient-start, 0.12);
+  transform: translateX(-50%);
+
+  @media (max-width: $bp-mobile) {
+    left: 24px;
+  }
+}
+
+/* Animated progress fill */
+.tl-line-progress {
+  width: 100%;
+  height: 0;
+  background: linear-gradient(180deg, $gradient-start, $gradient-end);
+  border-radius: 1px;
+  box-shadow: 0 0 8px rgba($gradient-start, 0.4);
+}
+
+/* ── Card wrapper ─────────────────────────────────────────── */
+.tl-card-wrapper {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 56px;
+  padding-top: 8px;
+
+  &:last-child { margin-bottom: 0; }
+
+  // Desktop: alternate sides
+  &.tl-left {
+    flex-direction: row;
+    .tl-card { margin-right: calc(50% + 40px); }
+    .tl-date-label {
+      right: auto;
+      left: calc(50% + 24px);
+      text-align: left;
+    }
+  }
+
+  &.tl-right {
+    flex-direction: row-reverse;
+    .tl-card { margin-left: calc(50% + 40px); }
+    .tl-date-label {
+      left: auto;
+      right: calc(50% + 24px);
+      text-align: right;
+    }
+  }
+
+  @media (max-width: $bp-mobile) {
+    flex-direction: row !important;
+    .tl-card {
+      margin-left: 56px !important;
+      margin-right: 0 !important;
+    }
+    .tl-date-label {
+      display: none;
+    }
+  }
+}
+
+/* ── Dot ──────────────────────────────────────────────────── */
+.tl-dot {
+  position: absolute;
+  left: 50%;
+  top: 16px;
+  transform: translateX(-50%);
+  z-index: 3;
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media (max-width: $bp-mobile) {
+    left: 24px;
+  }
+
+  .tl-dot-inner {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, $gradient-start, $gradient-end);
+    border: 2px solid $bg-dark;
+    transition: transform $transition-fast, box-shadow $transition-fast;
+
+    .light-mode & { border-color: $bg-light; }
+  }
+
+  .tl-dot-ring {
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 2px solid $gradient-start;
+    opacity: 0.5;
+    animation: dot-pulse 1.8s ease-in-out infinite;
+  }
+}
+
+.tl-active .tl-dot .tl-dot-inner {
+  transform: scale(1.3);
+  box-shadow: 0 0 12px rgba($gradient-start, 0.6);
+}
+
+@keyframes dot-pulse {
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(1.6); opacity: 0; }
+}
+
+/* ── Date label ───────────────────────────────────────────── */
+.tl-date-label {
+  position: absolute;
+  top: 16px;
+  font-size: 0.78rem;
+  font-family: $font-mono;
+  color: $text-dark-muted;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  .light-mode & { color: $text-light-muted; }
+
+  .tl-date-start {
+    color: $gradient-start;
+    font-weight: 600;
+  }
+
+  .tl-date-sep { opacity: 0.4; }
+
+  .tl-date-end {
+    color: $text-dark-secondary;
+    .light-mode & { color: $text-light-secondary; }
+  }
+}
+
+/* ── Card ─────────────────────────────────────────────────── */
+.tl-card {
+  @include glass-card;
+  padding: 28px;
+  flex: 1;
+  transition: border-color $transition-fast, box-shadow $transition-fast, transform $transition-fast;
+
+  &.tl-card--active {
+    border-color: rgba($gradient-start, 0.3);
+    box-shadow: 0 4px 24px rgba($gradient-start, 0.08), 0 8px 32px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+  }
+}
+
+.tl-card-header {
+  margin-bottom: 12px;
+
+  .tl-role {
+    font-size: 1.25rem;
+    font-weight: 700;
+    @include gradient-text;
+    margin-bottom: 4px;
+  }
+
+  .tl-company {
+    display: block;
+    font-size: 1rem;
+    font-weight: 500;
+    color: $text-dark-primary;
+    .light-mode & { color: $text-light-primary; }
+  }
+
+  .tl-location {
+    font-size: 0.82rem;
+    color: $text-dark-muted;
+    .light-mode & { color: $text-light-muted; }
+  }
+}
+
+/* Mobile-only date badge (shown when the side label is hidden) */
+@media (max-width: $bp-mobile) {
+  .tl-card-header::after {
+    display: none;
+  }
+
+  .tl-card::before {
+    content: attr(data-dates);
+    display: inline-block;
+    padding: 3px 10px;
+    font-size: 0.72rem;
+    border-radius: 10px;
+    background: rgba($gradient-start, 0.15);
+    color: $gradient-start;
+    margin-bottom: 12px;
+    font-family: $font-mono;
+  }
+}
+
+.tl-description {
+  font-size: 0.92rem;
+  color: $text-dark-secondary;
+  line-height: 1.7;
+  margin-bottom: 16px;
+
+  .light-mode & { color: $text-light-secondary; }
+}
+
+.tl-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 16px;
+
+  &.tl-chips--small {
+    margin-bottom: 8px;
+  }
+}
+
+/* ── Expand button ────────────────────────────────────────── */
+.tl-expand-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 10px 16px;
+  background: rgba($gradient-start, 0.05);
+  border: 1px solid rgba($gradient-start, 0.15);
+  border-radius: 10px;
+  color: $gradient-start;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: rgba($gradient-start, 0.1);
+    border-color: rgba($gradient-start, 0.3);
+  }
+
+  .tl-expand-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: rgba($gradient-start, 0.15);
+    font-size: 0.9rem;
+    font-weight: 700;
+    transition: transform $transition-fast;
+  }
+
+  &.tl-expand-btn--open .tl-expand-icon {
+    transform: rotate(180deg);
+  }
+}
+
+/* ── Sub-projects ─────────────────────────────────────────── */
+.tl-subprojects {
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+
+  &.tl-subprojects--open {
+    max-height: 2000px;
+    opacity: 1;
+  }
+}
+
+.tl-subproject {
+  padding: 16px 0;
+  border-top: 1px solid rgba($glass-border, 0.6);
+
+  &:first-child { margin-top: 16px; }
+}
+
+.tl-sp-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.tl-sp-name {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: $text-dark-primary;
+  .light-mode & { color: $text-light-primary; }
+}
+
+.tl-accomplishments {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  li {
+    font-size: 0.85rem;
+    color: $text-dark-secondary;
+    padding-left: 18px;
     position: relative;
-    max-width: 900px;
-    margin: 0 auto;
+    margin-bottom: 6px;
+    line-height: 1.5;
 
     &::before {
-      content: '';
+      content: '▹';
       position: absolute;
-      left: 50%;
-      top: 0;
-      bottom: 0;
-      width: 2px;
-      background: linear-gradient(180deg, $gradient-start, $gradient-end);
-      transform: translateX(-50%);
-
-      @media (max-width: $bp-mobile) {
-        left: 20px;
-      }
+      left: 0;
+      color: $gradient-start;
+      font-size: 0.9rem;
     }
+
+    .light-mode & { color: $text-light-secondary; }
   }
+}
 
-  .timeline-entry {
-    display: flex;
-    margin-bottom: 48px;
-    position: relative;
+/* ── AI badge ─────────────────────────────────────────────── */
+.ai-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 2px 8px;
+  border-radius: 10px;
+  background: rgba(102, 126, 234, 0.18);
+  border: 1px solid rgba(160, 180, 255, 0.4);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #b0c0ff;
+  text-transform: uppercase;
+  flex-shrink: 0;
 
-    &:nth-child(odd) {
-      flex-direction: row;
-      .timeline-card { margin-right: calc(50% + 32px); }
-
-      @media (max-width: $bp-mobile) {
-        flex-direction: row;
-        .timeline-card { margin-right: 0; margin-left: 48px; }
-      }
-    }
-
-    &:nth-child(even) {
-      flex-direction: row-reverse;
-      .timeline-card { margin-left: calc(50% + 32px); }
-
-      @media (max-width: $bp-mobile) {
-        flex-direction: row;
-        .timeline-card { margin-left: 48px; margin-right: 0; }
-      }
-    }
-
-    .timeline-dot {
-      position: absolute;
-      left: 50%;
-      top: 24px;
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: $gradient-start;
-      border: 2px solid $bg-dark;
-      transform: translateX(-50%);
-      z-index: 2;
-
-      @media (max-width: $bp-mobile) {
-        left: 20px;
-      }
-
-      .light-mode & {
-        border-color: $bg-light;
-      }
-    }
-  }
-
-  // AI badge — pulsing dot + label for AI-related sub-projects
-  .ai-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    padding: 2px 8px;
-    border-radius: 10px;
-    background: rgba(102, 126, 234, 0.18);
-    border: 1px solid rgba(160, 180, 255, 0.4);
-    font-size: 0.65rem;
-    font-weight: 700;
-    letter-spacing: 0.06em;
-    // #b0c0ff on dark bg achieves ~4.6:1 contrast ratio
-    color: #b0c0ff;
-    text-transform: uppercase;
-    flex-shrink: 0;
-
-    .light-mode & {
-      background: rgba(102, 126, 234, 0.1);
-      border-color: rgba(102, 126, 234, 0.35);
-      // #1e2f8a on near-white bg achieves > 7:1 contrast ratio
-      color: #1e2f8a;
-
-      .ai-badge-dot {
-        background: #1e2f8a;
-        box-shadow: 0 0 6px rgba(30, 47, 138, 0.7);
-      }
-    }
+  .light-mode & {
+    background: rgba(102, 126, 234, 0.1);
+    border-color: rgba(102, 126, 234, 0.35);
+    color: #1e2f8a;
 
     .ai-badge-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: #b0c0ff;
-      box-shadow: 0 0 6px rgba(176, 192, 255, 0.8);
-      animation: ai-pulse 1.6s ease-in-out infinite;
+      background: #1e2f8a;
+      box-shadow: 0 0 6px rgba(30, 47, 138, 0.7);
     }
   }
 
-  @keyframes ai-pulse {
-    0%, 100% { opacity: 1; }
-    50%       { opacity: 0.45; }
+  .ai-badge-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #b0c0ff;
+    box-shadow: 0 0 6px rgba(176, 192, 255, 0.8);
+    animation: ai-pulse 1.6s ease-in-out infinite;
   }
+}
 
-  .timeline-card {
-    @include glass-card;
-    padding: 24px;
-    flex: 1;
-
-    .timeline-role {
-      font-size: 1.2rem;
-      font-weight: 700;
-      @include gradient-text;
-      margin-bottom: 4px;
-    }
-
-    .timeline-company {
-      font-size: 1rem;
-      color: $text-dark-secondary;
-      margin-bottom: 4px;
-
-      .light-mode & { color: $text-light-secondary; }
-    }
-
-    .timeline-date {
-      display: inline-block;
-      padding: 3px 12px;
-      font-size: 0.75rem;
-      border-radius: 12px;
-      background: rgba($gradient-start, 0.15);
-      color: $gradient-start;
-      margin-bottom: 12px;
-    }
-
-    .timeline-description {
-      font-size: 0.9rem;
-      color: $text-dark-secondary;
-      line-height: 1.6;
-      margin-bottom: 12px;
-
-      .light-mode & { color: $text-light-secondary; }
-    }
-
-    .timeline-chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-bottom: 12px;
-    }
-
-    .sub-projects-toggle {
-      background: none;
-      border: 1px solid $glass-border;
-      border-radius: 8px;
-      padding: 8px 16px;
-      color: $gradient-start;
-      font-size: 0.85rem;
-      cursor: pointer;
-      transition: all $transition-fast;
-      width: 100%;
-      text-align: left;
-
-      &:hover {
-        background: rgba($gradient-start, 0.08);
-      }
-    }
-
-    .sub-projects {
-      overflow: hidden;
-      transition: max-height 0.4s ease, opacity 0.3s ease;
-      max-height: 0;
-      opacity: 0;
-
-      &.open {
-        max-height: 1000px;
-        opacity: 1;
-      }
-
-      .sub-project {
-        padding: 12px 0;
-        border-top: 1px solid $glass-border;
-
-        &:first-child { margin-top: 12px; }
-
-        .sub-project-name {
-          font-weight: 600;
-          font-size: 0.9rem;
-          margin-bottom: 6px;
-          display: flex;
-          align-items: center;
-          gap: 8px;
-        }
-
-        .sub-project-chips {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 6px;
-          margin-bottom: 8px;
-        }
-
-        .sub-project-accomplishments {
-          list-style: none;
-          padding: 0;
-
-          li {
-            font-size: 0.85rem;
-            color: $text-dark-secondary;
-            padding-left: 16px;
-            position: relative;
-            margin-bottom: 4px;
-
-            &::before {
-              content: '▸';
-              position: absolute;
-              left: 0;
-              color: $gradient-start;
-            }
-
-            .light-mode & { color: $text-light-secondary; }
-          }
-        }
-      }
-    }
-  }
+@keyframes ai-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.45; }
 }

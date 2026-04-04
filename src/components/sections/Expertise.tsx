@@ -4,6 +4,9 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { skillCategories } from '../../data/skills';
 import TechChip from '../ui/TechChip';
 import NeuralNetworkMini from '../ui/NeuralNetworkMini';
+import CodeStackMini from '../ui/CodeStackMini';
+import PipelineMini from '../ui/PipelineMini';
+import DataFlowMini from '../ui/DataFlowMini';
 import SceneContainer from '../three/SceneContainer';
 import WireframeCube from '../three/WireframeCube';
 import WireframeTorus from '../three/WireframeTorus';
@@ -107,7 +110,10 @@ export default function Expertise() {
                 </div>
               </div>
               <p className="skill-card-description">{category.description}</p>
+              {category.id === 'fullstack' && <CodeStackMini />}
+              {category.id === 'devops' && <PipelineMini />}
               {category.id === 'ai-ml' && <NeuralNetworkMini />}
+              {category.id === 'data' && <DataFlowMini />}
               <div className="skill-card-chips">
                 {category.technologies.map((tech) => (
                   <TechChip key={tech} label={tech} />
