@@ -22,9 +22,56 @@
     @media (max-width: $bp-mobile) {
       padding: 120px 5% 60px;
       max-width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
     }
   }
 
+  // ── Profile photo ──────────────────────────────────────────
+  .hero-photo-wrapper {
+    margin-bottom: 28px;
+    opacity: 0;
+
+    @media (max-width: $bp-mobile) {
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+  .hero-photo-ring {
+    width: 190px;
+    height: 190px;
+    border-radius: 50%;
+    padding: 3px;
+    background: linear-gradient(135deg, $gradient-start, $gradient-end);
+    box-shadow:
+      0 0 20px rgba(102, 126, 234, 0.45),
+      0 0 40px rgba(118, 75, 162, 0.25);
+    display: inline-block;
+
+    @media (max-width: $bp-mobile) {
+      width: 150px;
+      height: 150px;
+    }
+  }
+
+  .hero-photo {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+    border: 3px solid $bg-dark;
+
+    .light-mode & {
+      border-color: $bg-light;
+    }
+  }
+
+  // ── Label ──────────────────────────────────────────────────
   .hero-label {
     font-size: 0.85rem;
     letter-spacing: 3px;
@@ -36,20 +83,64 @@
     background-clip: text;
     -webkit-text-fill-color: transparent;
     opacity: 0;
-  }
 
-  .hero-name {
-    font-size: 3.5rem;
-    font-weight: 700;
-    margin-bottom: 16px;
-    line-height: 1.1;
-    opacity: 0;
+    // Reveal animation feel via a clip-path sweep
+    animation: label-reveal 0.8s ease forwards;
+    animation-play-state: paused; // GSAP controls opacity/y; CSS handles the clip sweep after GSAP sets opacity
 
     @media (max-width: $bp-mobile) {
-      font-size: 2.2rem;
+      letter-spacing: 2px;
     }
   }
 
+  // ── Name ───────────────────────────────────────────────────
+  .hero-name {
+    font-size: 4.2rem;
+    font-weight: 800;
+    margin-bottom: 16px;
+    line-height: 1.05;
+    opacity: 0;
+    position: relative;
+    display: inline-block; // shrink-wrap so underline matches text width
+
+    @media (max-width: $bp-mobile) {
+      font-size: 2.6rem;
+    }
+  }
+
+  .hero-name-text {
+    display: block;
+  }
+
+  .hero-name-underline {
+    display: block;
+    height: 3px;
+    margin-top: 6px;
+    border-radius: 2px;
+    overflow: hidden;
+    width: 0;
+    transition: width 0.8s ease 1.4s; // expands after name animates in
+    opacity: 0.9;
+
+    // Trigger expansion once parent is visible (GSAP sets opacity:1 on parent)
+    .hero-name[style*='opacity: 1'] &,
+    .hero-name[style*='opacity:1'] & {
+      width: 100%;
+    }
+
+    // Sliding shimmer via transform (compositor-only, no paint)
+    &::after {
+      content: '';
+      display: block;
+      width: 300%;
+      height: 100%;
+      background: linear-gradient(90deg, $gradient-start, $gradient-end, $gradient-start);
+      animation: gradient-slide 2.4s linear infinite;
+      will-change: transform;
+    }
+  }
+
+  // ── Bio ────────────────────────────────────────────────────
   .hero-bio {
     font-size: 1.1rem;
     line-height: 1.6;
@@ -61,8 +152,13 @@
     .light-mode & {
       color: $text-light-secondary;
     }
+
+    @media (max-width: $bp-mobile) {
+      max-width: 100%;
+    }
   }
 
+  // ── Socials ────────────────────────────────────────────────
   .hero-socials {
     display: flex;
     gap: 16px;
@@ -89,6 +185,7 @@
     }
   }
 
+  // ── CV buttons ─────────────────────────────────────────────
   .hero-cv-buttons {
     display: flex;
     gap: 12px;
@@ -125,4 +222,52 @@
       }
     }
   }
+
+  // ── Scroll indicator ───────────────────────────────────────
+  .hero-scroll-indicator {
+    position: absolute;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    opacity: 0;
+    cursor: default;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  .hero-scroll-label {
+    font-size: 0.7rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: $text-dark-muted;
+
+    .light-mode & {
+      color: $text-light-muted;
+    }
+  }
+
+  .hero-scroll-chevron {
+    font-size: 0.85rem;
+    color: $text-dark-muted;
+
+    .light-mode & {
+      color: $text-light-muted;
+    }
+  }
+}
+
+// ── Keyframes ───────────────────────────────────────────────
+@keyframes gradient-slide {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-66.67%); }
+}
+
+@keyframes label-reveal {
+  from { clip-path: inset(0 100% 0 0); }
+  to   { clip-path: inset(0 0% 0 0); }
 }
