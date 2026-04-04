@@ -104,8 +104,13 @@ export default function Hero() {
           autoPlay
           muted
           playsInline
+          preload="auto"
           onEnded={() => setVideoEnded(true)}
           onError={() => setVideoError(true)}
+          onCanPlayThrough={(e) => {
+            const v = e.currentTarget;
+            if (v.paused) v.play().catch(() => setVideoError(true));
+          }}
         >
           <source src={heroVideoSrc} type="video/webm" />
         </video>
