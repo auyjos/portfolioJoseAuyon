@@ -1,4 +1,5 @@
 @use 'variables' as *;
+@use 'mixins' as *;
 
 *,
 *::before,
@@ -54,4 +55,42 @@ body {
     font-size: 1.8rem;
     margin-bottom: 32px;
   }
+}
+
+// Reusable UI components
+
+.glass-card {
+  @include glass-card;
+  padding: 24px;
+}
+
+.tech-chip {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  font-family: $font-mono;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: $text-dark-secondary;
+  letter-spacing: 0.02em;
+  transition: background $transition-fast, border-color $transition-fast;
+
+  .light-mode & {
+    background: rgba(0, 0, 0, 0.06);
+    border-color: rgba(0, 0, 0, 0.1);
+    color: $text-light-secondary;
+  }
+}
+
+.category-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  // background and color set via inline styles from CategoryBadge component
 }
