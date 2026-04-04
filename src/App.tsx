@@ -1,48 +1,41 @@
-import React, {useState, useEffect} from "react";
-import {
-  Main,
-  Timeline,
-  Expertise,
-  Project,
-  Navigation,
-  Footer,
-  Certificates
-} from "./components";
-import FadeIn from './components/FadeIn';
-import useScrollReveal from "./hooks/useScrollReveal";
-import './index.scss';
+import { useState } from 'react';
+import ScrollProvider from './components/layout/ScrollProvider';
+import Navigation from './components/layout/Navigation';
+import DotNav from './components/layout/DotNav';
+import './assets/styles/index.scss';
 
 function App() {
-    const [mode, setMode] = useState<string>('dark');
+  const [mode, setMode] = useState<string>('dark');
 
-    const handleModeChange = () => {
-        if (mode === 'dark') {
-            setMode('light');
-        } else {
-            setMode('dark');
-        }
-    }
+  const handleModeChange = () => {
+    setMode((prev) => (prev === 'dark' ? 'light' : 'dark'));
+  };
 
-    useScrollReveal();    
-    useEffect(() => {
-        window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
-      }, []);
-
-    return (
-    <div className={`main-container ${mode === 'dark' ? 'dark-mode' : 'light-mode'}`}>
-        
-        <Navigation parentToChild={{mode}} modeChange={handleModeChange}/>
-        <FadeIn transitionDuration={700}>
-            <Main/>
-            <Expertise/>
-            <Timeline/>
-            <Project/>
-            <Certificates /> 
-            
-        </FadeIn>
-        <Footer />
-    </div>
-    );
+  return (
+    <ScrollProvider>
+      <div className={`main-container ${mode === 'dark' ? 'dark-mode' : 'light-mode'}`}>
+        <Navigation mode={mode} onModeChange={handleModeChange} />
+        <DotNav />
+        <main>
+          <section id="hero" className="placeholder-section">
+            <h1>Hero Placeholder</h1>
+          </section>
+          <section id="expertise" className="placeholder-section">
+            <h2>Expertise Placeholder</h2>
+          </section>
+          <section id="history" className="placeholder-section">
+            <h2>Timeline Placeholder</h2>
+          </section>
+          <section id="projects" className="placeholder-section">
+            <h2>Projects Placeholder</h2>
+          </section>
+          <section id="credentials" className="placeholder-section">
+            <h2>Credentials Placeholder</h2>
+          </section>
+        </main>
+      </div>
+    </ScrollProvider>
+  );
 }
 
 export default App;

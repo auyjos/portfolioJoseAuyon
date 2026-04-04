@@ -44,6 +44,11 @@ body {
   -webkit-text-fill-color: transparent;
 }
 
+// Placeholder sections (removed before final build)
+.placeholder-section {
+  min-height: 100vh;
+}
+
 // Section titles
 .section-title {
   font-size: 2.5rem;
