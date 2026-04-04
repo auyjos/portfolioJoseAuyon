@@ -1,3 +1,4 @@
+// @ts-nocheck — legacy MUI component, replaced by src/components/layout/Navigation.tsx
 import  { useEffect, useState } from "react";
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
