@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
@@ -8,24 +8,45 @@ import ConstellationNetwork from '../three/ConstellationNetwork';
 import WireframeIcosahedron from '../three/WireframeIcosahedron';
 import useMousePosition from '../../hooks/useMousePosition';
 import cvEnglish from '../../_someFolder/CVEnglishJoseAuyon.pdf';
+import heroVideoSrc from '../../assets/videos/hero-intro.webm';
 import '../../assets/styles/Hero.scss';
 
 export default function Hero() {
   const contentRef = useRef<HTMLDivElement>(null);
   const mouse = useMousePosition();
+  const [videoEnded, setVideoEnded] = useState(false);
+  const [videoError, setVideoError] = useState(false);
 
+  // If the video errors (missing file, unsupported codec, etc.), fall through
+  // to the live 3D scene immediately so the page is never blocked.
   useEffect(() => {
+    if (videoError) {
+      const t = setTimeout(() => setVideoEnded(true), 100);
+      return () => clearTimeout(t);
+    }
+  }, [videoError]);
+
+  // Run entrance animations once the intro video is done (or skipped).
+  useEffect(() => {
+    if (!videoEnded) return;
     if (!contentRef.current) return;
 
-    // Set initial states
-    gsap.set(['.hero-photo-wrapper', '.hero-label', '.hero-name', '.hero-bio', '.hero-socials', '.hero-cv-buttons', '.hero-scroll-indicator'], {
-      y: 20,
-      opacity: 0,
-    });
+    gsap.set(
+      [
+        '.hero-photo-wrapper',
+        '.hero-label',
+        '.hero-name',
+        '.hero-bio',
+        '.hero-socials',
+        '.hero-cv-buttons',
+        '.hero-scroll-indicator',
+      ],
+      { y: 20, opacity: 0 }
+    );
 
     const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
-    tl.to('.hero-photo-wrapper', { opacity: 1, y: 0, scale: 1, duration: 0.7, delay: 0.2, ease: 'back.out(1.4)' })
+    tl.to('.hero-photo-wrapper', { opacity: 1, y: 0, scale: 1, duration: 0.7, delay: 0.1, ease: 'back.out(1.4)' })
       .to('.hero-label', { opacity: 1, y: 0, duration: 0.6 }, '-=0.4')
       .to('.hero-name', { opacity: 1, y: 0, duration: 0.6 }, '-=0.3')
       .to('.hero-bio', { opacity: 1, y: 0, duration: 0.6 }, '-=0.3')
@@ -42,21 +63,37 @@ export default function Hero() {
       yoyo: true,
       delay: 2,
     });
-  }, []);
+  }, [videoEnded]);
 
   return (
     <section id="hero" className="hero">
+      {/* Intro video — plays once then reveals the live 3D scene */}
+      {!videoEnded && !videoError && (
+        <video
+          className="hero-video"
+          autoPlay
+          muted
+          playsInline
+          onEnded={() => setVideoEnded(true)}
+          onError={() => setVideoError(true)}
+        >
+          <source src={heroVideoSrc} type="video/webm" />
+        </video>
+      )}
+
+      {/* Live 3D scene — hidden while intro plays, fades in after */}
       <SceneContainer
-        className="hero-scene"
-        style={{ position: 'absolute', inset: 0 }}
+        className={`hero-scene${videoEnded ? '' : ' hero-scene--hidden'}`}
         camera={{ position: [0, 0, 6], fov: 60 }}
       >
+        {/* eslint-disable-next-line react/no-unknown-property */}
         <ambientLight intensity={0.5} />
         <ConstellationNetwork
           count={35}
           mouseX={mouse.normalizedX}
           mouseY={mouse.normalizedY}
         />
+        {/* eslint-disable-next-line react/no-unknown-property */}
         <group position={[2.5, 0, 0]}>
           <WireframeIcosahedron
             mouseX={mouse.normalizedX}
@@ -88,6 +125,7 @@ export default function Hero() {
           product development, and AI-enabled solutions. Building production systems,
           client-facing platforms, and intelligent tools.
         </p>
+
         <div className="hero-socials">
           <a href="https://github.com/auyjos" target="_blank" rel="noreferrer" aria-label="GitHub">
             <FontAwesomeIcon icon={faGithub} />
@@ -99,7 +137,9 @@ export default function Hero() {
             <FontAwesomeIcon icon={faEnvelope} />
           </a>
         </div>
+
         <div className="hero-cv-buttons">
+          {/* download attribute has limited iOS < 13 support; acceptable trade-off for a CV link */}
           <a href={cvEnglish} download>Resume (EN)</a>
         </div>
       </div>

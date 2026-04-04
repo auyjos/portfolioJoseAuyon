@@ -17,5 +17,5 @@ export default defineConfig({
   build: {
     outDir: 'dist',
   },
-  assetsInclude: ['**/*.pdf'],
+  assetsInclude: ['**/*.pdf', '**/*.webm'],
 });

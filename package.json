@@ -28,7 +28,9 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
     "test": "playwright test",
-    "test:ui": "playwright test --ui"
+    "test:ui": "playwright test --ui",
+    "remotion:preview": "remotion preview src/remotion/index.ts",
+    "remotion:render": "remotion render src/remotion/index.ts HeroIntro src/assets/videos/hero-intro.webm"
   },
   "browserslist": {
     "production": [
@@ -44,10 +46,12 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.59.1",
+    "@remotion/cli": "^4.0.443",
     "@types/node": "^25.5.2",
     "@types/three": "^0.183.1",
     "@vitejs/plugin-react": "^6.0.1",
     "gh-pages": "^6.3.0",
+    "remotion": "^4.0.443",
     "vite": "^8.0.3"
   }
 }
