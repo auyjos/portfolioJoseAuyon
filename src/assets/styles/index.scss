@@ -1,0 +1,109 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: auto; // Lenis handles smooth scroll
+}
+
+body {
+  font-family: $font-primary;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+
+  @media (pointer: fine) {
+    cursor: none;
+
+    a, button, [role="button"], input, textarea, select {
+      cursor: none;
+    }
+  }
+}
+
+.dark-mode {
+  background-color: $bg-dark;
+  color: $text-dark-primary;
+}
+
+.light-mode {
+  background-color: $bg-light;
+  color: $text-light-primary;
+}
+
+.main-container {
+  position: relative;
+  min-height: 100vh;
+  transition: background-color $transition-normal, color $transition-normal;
+}
+
+// Gradient text utility
+.gradient-text {
+  background: linear-gradient(135deg, $gradient-start, $gradient-end);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+// Placeholder sections (removed before final build)
+.placeholder-section {
+  min-height: 100vh;
+}
+
+// Section titles
+.section-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 48px;
+  text-align: center;
+
+  @media (max-width: $bp-mobile) {
+    font-size: 1.8rem;
+    margin-bottom: 32px;
+  }
+}
+
+// Reusable UI components
+
+.glass-card {
+  @include glass-card;
+  padding: 24px;
+}
+
+.tech-chip {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  font-family: $font-mono;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: $text-dark-secondary;
+  letter-spacing: 0.02em;
+  transition: background $transition-fast, border-color $transition-fast;
+
+  .light-mode & {
+    background: rgba(0, 0, 0, 0.06);
+    border-color: rgba(0, 0, 0, 0.1);
+    color: $text-light-secondary;
+  }
+}
+
+.category-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  // background and color set via inline styles from CategoryBadge component
+}

@@ -10,6 +10,7 @@
 
 # production
 /build
+/dist
 
 # misc
 .DS_Store
@@ -21,3 +22,16 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Claude Code
+/.claude
+
+# Superpowers
+.superpowers/
+
+# Playwright
+test-results/
+playwright-report/
+
+# Remotion
+remotion-output/

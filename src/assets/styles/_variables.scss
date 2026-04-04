@@ -1,0 +1,36 @@
+// Colors
+$bg-dark: #0d1116;
+$bg-light: #f8f9fa;
+$accent: #5000ca;
+$gradient-start: #667eea;
+$gradient-end: #764ba2;
+
+$text-dark-primary: rgba(255, 255, 255, 1);
+$text-dark-secondary: rgba(255, 255, 255, 0.8);
+$text-dark-muted: rgba(255, 255, 255, 0.4);
+
+$text-light-primary: rgba(0, 0, 0, 0.9);
+$text-light-secondary: rgba(0, 0, 0, 0.7);
+$text-light-muted: rgba(0, 0, 0, 0.4);
+
+// Glass
+$glass-bg: rgba(255, 255, 255, 0.04);
+$glass-bg-hover: rgba(255, 255, 255, 0.08);
+$glass-border: rgba(255, 255, 255, 0.1);
+$glass-blur: 12px;
+
+$glass-light-bg: rgba(255, 255, 255, 0.9);
+$glass-light-border: rgba(0, 0, 0, 0.08);
+
+// Typography
+$font-primary: 'Lato', sans-serif;
+$font-mono: 'Courier Prime', monospace;
+
+// Breakpoints
+$bp-mobile: 768px;
+$bp-tablet: 1200px;
+
+// Transitions
+$transition-fast: 250ms ease;
+$transition-normal: 400ms ease;
+$transition-slow: 700ms ease;

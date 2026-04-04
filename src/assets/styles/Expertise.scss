@@ -1,345 +1,59 @@
-// Enhanced Expertise section with modern design patterns
-.skills-container {
-    padding: 5% 10%;
-    display: flex;
-    flex-direction: column;
-    text-align: left;
-    position: relative;
+@use 'variables' as *;
+@use 'mixins' as *;
 
-    // Enhanced title with gradient styling
-    h1 {
-        text-align: center;
-        margin-bottom: 3rem;
-        background: linear-gradient(45deg, #f2f2f3 0%, #eeecf0 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        font-size: 2.5rem;
-        font-weight: bold;
-        opacity: 0;
-        transform: translateY(30px);
-        animation: fadeInUp 0.8s ease forwards;
-    }
+.expertise {
+  @include section-padding;
 
-    svg {
-        color: white;
-        transition: all 0.3s ease;
-        
-        &:hover {
-            transform: scale(1.1) rotate(5deg);
-            filter: drop-shadow(0 0 10px rgba(102, 126, 234, 0.4));
-        }
-    }
-}
-
-// Enhanced skills grid with modern card effects
-.skills-container .skills-grid {
+  .expertise-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-gap: 40px;
-    perspective: 1000px;
-}
+    gap: 24px;
 
-// Modern skill cards with glassmorphism effect
-.skills-container .skills-grid .skill {
-    opacity: 0;
-    transform: translateY(30px);
-    will-change: transform, opacity;
-    align-items: center;
-    text-align: left;
-    border-radius: 12px;
-    padding: 24px;
-    background: rgba(255, 255, 255, 0.05);
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    transition: all 0.3s ease;
+    @media (max-width: $bp-tablet) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .skill-card {
+    @include glass-card;
+    padding: 28px;
     position: relative;
     overflow: hidden;
-    
-    // Light sweep effect
-    &::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-        transition: left 0.6s ease;
-        z-index: 1;
-    }
-    
-    &:hover {
-        transform: translateY(-8px) scale(1.02);
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-        border-color: rgba(102, 126, 234, 0.3);
-        
-        &::before {
-            left: 100%;
-        }
-    }
-    
-    // Enhanced typography
-    h3 {
-        background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        margin: 1rem 0;
-        transition: all 0.3s ease;
-        font-size: 1.4rem;
-        font-weight: bold;
-        position: relative;
-        z-index: 2;
-        
-        &:hover {
-            transform: scale(1.02);
-        }
-    }
-    
-    p {
-        line-height: 1.6;
-        color: rgba(255, 255, 255, 0.8);
-        margin: 1rem 0;
-        position: relative;
-        z-index: 2;
-    }
-}
 
-// Enhanced highlight list styling
-.highlight-list {
-    list-style: none;
-    padding: 0;
-    margin: 1rem 0;
-    position: relative;
-    z-index: 2;
-    
-    li {
-        color: rgba(255, 255, 255, 0.8);
-        padding: 8px 0;
-        padding-left: 20px;
-        position: relative;
-        transition: all 0.3s ease;
-        
-        &::before {
-            content: '▶';
-            position: absolute;
-            left: 0;
-            color: #667eea;
-            font-size: 0.8rem;
-            transition: all 0.3s ease;
-        }
-        
-        &:hover {
-            color: rgba(255, 255, 255, 0.95);
-            transform: translateX(5px);
-            
-            &::before {
-                color: #764ba2;
-                transform: scale(1.2);
-            }
-        }
-    }
-}
-
-// Enhanced chip styling
-.chip {
-    background: linear-gradient(45deg, rgba(102, 126, 234, 0.2), rgba(118, 75, 162, 0.2)) !important;
-    border: 1px solid rgba(102, 126, 234, 0.3) !important;
-    color: rgba(255, 255, 255, 0.9) !important;
-    font-size: 0.8rem !important;
-    height: 28px !important;
-    transition: all 0.3s ease !important;
-    -webkit-backdrop-filter: blur(5px);
-    backdrop-filter: blur(5px);
-    
-    &:hover {
-        background: linear-gradient(45deg, rgba(102, 126, 234, 0.4), rgba(118, 75, 162, 0.4)) !important;
-        transform: translateY(-2px) scale(1.05) !important;
-        box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3) !important;
+    .skill-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 16px;
     }
 
-    span {
-        font-family: 'Courier Prime', monospace;
-        color: rgba(255, 255, 255, 0.9) !important;
-        font-weight: 500;
+    .skill-card-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      @include gradient-text;
     }
 
-    svg {
-        height: 15px !important;
-        color: rgba(255, 255, 255, 0.9) !important;
+    .skill-card-3d {
+      width: 60px;
+      height: 60px;
+      flex-shrink: 0;
     }
-}
 
-.flex-chips {
-    line-height: 2;
-    margin: 1rem 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    align-items: center;
-    position: relative;
-    z-index: 2;
+    .skill-card-description {
+      font-size: 0.9rem;
+      color: $text-dark-secondary;
+      margin-bottom: 16px;
+      line-height: 1.5;
 
-    .chip-title {
-        color: rgba(255, 255, 255, 0.9);
-        font-weight: 600;
-        margin-right: 10px;
-        background: linear-gradient(45deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
-        padding: 6px 12px;
-        border-radius: 8px;
-        border: 1px solid rgba(102, 126, 234, 0.2);
-        transition: all 0.3s ease;
-        
-        &:hover {
-            background: linear-gradient(45deg, rgba(102, 126, 234, 0.2), rgba(118, 75, 162, 0.2));
-            transform: scale(1.05);
-        }
+      .light-mode & {
+        color: $text-light-secondary;
+      }
     }
-}
 
-// Staggered animation delays
-.skill:nth-child(1) { animation: slideInSkill 0.8s ease forwards; animation-delay: 0.1s; }
-.skill:nth-child(2) { animation: slideInSkill 0.8s ease forwards; animation-delay: 0.2s; }
-.skill:nth-child(3) { animation: slideInSkill 0.8s ease forwards; animation-delay: 0.3s; }
-.skill:nth-child(4) { animation: slideInSkill 0.8s ease forwards; animation-delay: 0.4s; }
-
-// Keyframe animations
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
+    .skill-card-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
     }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes slideInSkill {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-// Responsive design
-@media (max-width: 1200px) {
-    .skills-container .skills-grid {
-        grid-template-columns: 1fr;
-        grid-gap: 30px;
-    }
-}
-
-@media screen and (max-width: 768px) {
-    .skills-container {
-        padding: 5% 5%;
-    }
-    
-    .skills-container h1 {
-        font-size: 2rem;
-    }
-    
-    .skills-container .skills-grid {
-        grid-gap: 20px;
-    }
-    
-    .skills-container .skills-grid .skill {
-        padding: 20px;
-        
-        &:hover {
-            transform: translateY(-4px) scale(1.01);
-        }
-    }
-}
-
-@media (max-width: 567px) {
-    .skills-container h1 {
-        font-size: 1.8rem;
-    }
-    
-    .skills-container .skills-grid .skill {
-        padding: 16px;
-    }
-}
-
-// Light mode adaptive styling
-.light-mode {
-    .skills-container {
-        svg {
-            color: #0d1116;
-            
-            &:hover {
-                filter: drop-shadow(0 0 10px rgba(102, 126, 234, 0.6));
-            }
-        }
-    }
-    
-    .skills-container .skills-grid .skill {
-        background: rgba(255, 255, 255, 0.9);
-        border: 1px solid rgba(0, 0, 0, 0.08);
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
-        
-        &::before {
-            background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.03), transparent);
-        }
-        
-        &:hover {
-            background: rgba(255, 255, 255, 0.95);
-            border-color: rgba(102, 126, 234, 0.3);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
-        }
-        
-        p {
-            color: rgba(0, 0, 0, 0.7);
-        }
-    }
-    
-    .highlight-list li {
-        color: rgba(0, 0, 0, 0.7);
-        
-        &:hover {
-            color: rgba(0, 0, 0, 0.9);
-        }
-        
-        &::before {
-            color: #667eea;
-        }
-    }
-    
-    .chip {
-        background: rgba(102, 126, 234, 0.1) !important;
-        border: 1px solid rgba(102, 126, 234, 0.2) !important;
-        color: rgba(0, 0, 0, 0.8) !important;
-        
-        &:hover {
-            background: rgba(102, 126, 234, 0.2) !important;
-            color: rgba(0, 0, 0, 0.9) !important;
-            box-shadow: 0 3px 10px rgba(102, 126, 234, 0.2) !important;
-        }
-        
-        span {
-            color: rgba(0, 0, 0, 0.8) !important;
-        }
-        
-        svg {
-            color: rgba(0, 0, 0, 0.8) !important;
-        }
-    }
-    
-    .flex-chips .chip-title {
-        color: rgba(0, 0, 0, 0.8);
-        background: rgba(102, 126, 234, 0.1);
-        border: 1px solid rgba(102, 126, 234, 0.2);
-        
-        &:hover {
-            background: rgba(102, 126, 234, 0.2);
-            color: rgba(0, 0, 0, 0.9);
-        }
-    }
+  }
 }

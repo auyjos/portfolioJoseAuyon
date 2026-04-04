@@ -1,0 +1,16 @@
+.neural-network-mini {
+  display: block;
+  width: 150px;
+  height: 80px;
+  margin: 12px auto 0;
+  overflow: visible;
+
+  .nn-edge {
+    will-change: opacity;
+  }
+
+  .nn-node {
+    will-change: opacity, r;
+    filter: drop-shadow(0 0 3px rgba(102, 126, 234, 0.7));
+  }
+}

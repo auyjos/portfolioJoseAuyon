@@ -1,0 +1,38 @@
+// Custom cursor — hidden on touch/mobile via pointer media query
+@media (pointer: fine) {
+  .cursor-dot {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #667eea;
+    pointer-events: none;
+    z-index: 99999;
+    will-change: transform;
+    transition: opacity 0.2s ease;
+  }
+
+  .cursor-ring {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(102, 126, 234, 0.6);
+    background-color: rgba(102, 126, 234, 0.1);
+    pointer-events: none;
+    z-index: 99998;
+    will-change: transform;
+    transition: width 0.25s ease, height 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
+
+    &.cursor-ring--expanded {
+      width: 48px;
+      height: 48px;
+      border-color: rgba(102, 126, 234, 0.8);
+      background-color: rgba(102, 126, 234, 0.15);
+    }
+  }
+}
