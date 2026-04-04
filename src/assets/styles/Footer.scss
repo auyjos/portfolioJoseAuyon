@@ -1,15 +1,127 @@
-footer {
-    text-align: center;
-    padding-top: 50px;
-    padding-bottom: 50px;
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
 
-    svg {
-        width: 1.1em !important;
-        height: 1.1em !important;
-        margin-right: 10px;
-    }
+.site-footer {
+  position: relative;
+  width: 100%;
+  height: 260px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-    p {
-        font-size: 0.8em;
+  // Subtle top border
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba($gradient-start, 0.4),
+      rgba($gradient-end, 0.4),
+      transparent
+    );
+  }
+}
+
+// Three.js canvas fills the footer
+.footer-scene {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+// Content layered above the canvas
+.footer-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  pointer-events: none; // let child anchors re-enable
+
+  > * {
+    pointer-events: auto;
+  }
+}
+
+.footer-tagline {
+  font-size: 0.8rem;
+  color: $text-dark-muted;
+  letter-spacing: 0.04em;
+  text-align: center;
+  margin: 0;
+}
+
+.footer-links {
+  display: flex;
+  gap: 24px;
+
+  a {
+    color: $text-dark-secondary;
+    transition: color $transition-fast, transform $transition-fast;
+    font-size: 1.4rem;
+
+    &:hover {
+      color: $gradient-start;
+      transform: translateY(-3px);
     }
+  }
+}
+
+.footer-cv-link {
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 6px 18px;
+  border-radius: 20px;
+  border: 1px solid rgba($gradient-start, 0.35);
+  color: $text-dark-secondary;
+  text-decoration: none;
+  transition: background $transition-fast, color $transition-fast, border-color $transition-fast;
+
+  &:hover {
+    background: rgba($gradient-start, 0.15);
+    color: $text-dark-primary;
+    border-color: rgba($gradient-start, 0.6);
+  }
+}
+
+// Light mode
+.light-mode {
+  .footer-tagline {
+    color: $text-light-muted;
+  }
+
+  .footer-links a {
+    color: $text-light-secondary;
+
+    &:hover {
+      color: $accent;
+    }
+  }
+
+  .footer-cv-link {
+    color: $text-light-secondary;
+
+    &:hover {
+      color: $text-light-primary;
+    }
+  }
+}
+
+@media (max-width: $bp-mobile) {
+  .site-footer {
+    height: 220px;
+  }
 }
