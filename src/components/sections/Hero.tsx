@@ -9,7 +9,7 @@ import WireframeIcosahedron from '../three/WireframeIcosahedron';
 import useMousePosition from '../../hooks/useMousePosition';
 import useMagneticHover from '../../hooks/useMagneticHover';
 import cvEnglish from '../../_someFolder/CVEnglishJoseAuyon.pdf';
-import heroVideoSrc from '../../assets/videos/hero-intro.webm';
+import heroVideoSrc from '../../assets/videos/hero-intro.mp4';
 import '../../assets/styles/Hero.scss';
 
 function MagneticLink({ children, className, ...props }: Readonly<React.AnchorHTMLAttributes<HTMLAnchorElement>>) {
@@ -112,7 +112,7 @@ export default function Hero() {
             if (v.paused) v.play().catch(() => setVideoError(true));
           }}
         >
-          <source src={heroVideoSrc} type="video/webm" />
+          <source src={heroVideoSrc} type="video/mp4" />
         </video>
       )}
 
