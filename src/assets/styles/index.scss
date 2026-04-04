@@ -1,0 +1,57 @@
+@use 'variables' as *;
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: auto; // Lenis handles smooth scroll
+}
+
+body {
+  font-family: $font-primary;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+.dark-mode {
+  background-color: $bg-dark;
+  color: $text-dark-primary;
+}
+
+.light-mode {
+  background-color: $bg-light;
+  color: $text-light-primary;
+}
+
+.main-container {
+  position: relative;
+  min-height: 100vh;
+  transition: background-color $transition-normal, color $transition-normal;
+}
+
+// Gradient text utility
+.gradient-text {
+  background: linear-gradient(135deg, $gradient-start, $gradient-end);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+// Section titles
+.section-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 48px;
+  text-align: center;
+
+  @media (max-width: $bp-mobile) {
+    font-size: 1.8rem;
+    margin-bottom: 32px;
+  }
+}

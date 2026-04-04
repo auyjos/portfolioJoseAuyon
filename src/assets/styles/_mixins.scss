@@ -1,0 +1,50 @@
+@use 'variables' as *;
+
+@mixin glass-card {
+  background: $glass-bg;
+  backdrop-filter: blur($glass-blur);
+  -webkit-backdrop-filter: blur($glass-blur);
+  border: 1px solid $glass-border;
+  border-radius: 16px;
+  transition: background $transition-fast, box-shadow $transition-fast;
+
+  &:hover {
+    background: $glass-bg-hover;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  }
+
+  .light-mode & {
+    background: $glass-light-bg;
+    border-color: $glass-light-border;
+    backdrop-filter: blur(8px);
+
+    &:hover {
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+    }
+  }
+}
+
+@mixin gradient-text {
+  background: linear-gradient(135deg, $gradient-start, $gradient-end);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@mixin section-padding {
+  padding: 100px 10%;
+
+  @media (max-width: $bp-mobile) {
+    padding: 60px 5%;
+  }
+}
+
+@mixin responsive-grid($min-width: 300px) {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax($min-width, 1fr));
+  gap: 24px;
+
+  @media (max-width: $bp-mobile) {
+    grid-template-columns: 1fr;
+  }
+}
