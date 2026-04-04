@@ -7,9 +7,20 @@ import SceneContainer from '../three/SceneContainer';
 import ConstellationNetwork from '../three/ConstellationNetwork';
 import WireframeIcosahedron from '../three/WireframeIcosahedron';
 import useMousePosition from '../../hooks/useMousePosition';
+import useMagneticHover from '../../hooks/useMagneticHover';
 import cvEnglish from '../../_someFolder/CVEnglishJoseAuyon.pdf';
 import heroVideoSrc from '../../assets/videos/hero-intro.webm';
 import '../../assets/styles/Hero.scss';
+
+function MagneticLink({ children, className, ...props }: Readonly<React.AnchorHTMLAttributes<HTMLAnchorElement>>) {
+  const ref = useRef<HTMLAnchorElement>(null);
+  useMagneticHover(ref, 8);
+  return (
+    <a ref={ref} className={className} {...props}>
+      {children}
+    </a>
+  );
+}
 
 export default function Hero() {
   const contentRef = useRef<HTMLDivElement>(null);
@@ -127,20 +138,20 @@ export default function Hero() {
         </p>
 
         <div className="hero-socials">
-          <a href="https://github.com/auyjos" target="_blank" rel="noreferrer" aria-label="GitHub">
+          <MagneticLink href="https://github.com/auyjos" target="_blank" rel="noreferrer" aria-label="GitHub">
             <FontAwesomeIcon icon={faGithub} />
-          </a>
-          <a href="https://linkedin.com/in/jose-auyon" target="_blank" rel="noreferrer" aria-label="LinkedIn">
+          </MagneticLink>
+          <MagneticLink href="https://linkedin.com/in/jose-auyon" target="_blank" rel="noreferrer" aria-label="LinkedIn">
             <FontAwesomeIcon icon={faLinkedin} />
-          </a>
-          <a href="mailto:auyon.joseandres@gmail.com" aria-label="Email">
+          </MagneticLink>
+          <MagneticLink href="mailto:auyon.joseandres@gmail.com" aria-label="Email">
             <FontAwesomeIcon icon={faEnvelope} />
-          </a>
+          </MagneticLink>
         </div>
 
         <div className="hero-cv-buttons">
           {/* download attribute has limited iOS < 13 support; acceptable trade-off for a CV link */}
-          <a href={cvEnglish} download>Resume (EN)</a>
+          <MagneticLink href={cvEnglish} download="">Resume (EN)</MagneticLink>
         </div>
       </div>
 

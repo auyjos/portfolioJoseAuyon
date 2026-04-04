@@ -5,7 +5,11 @@ import { experience } from '../../data/experience';
 import TechChip from '../ui/TechChip';
 import SceneContainer from '../three/SceneContainer';
 import WireframeTorusKnot from '../three/WireframeTorusKnot';
+import useTextReveal from '../../hooks/useTextReveal';
 import '../../assets/styles/Timeline.scss';
+
+// Sub-project names that have significant AI work
+const AI_SUBPROJECTS = new Set(['FocalPoints', 'Alina (Legal AI SaaS)']);
 
 gsap.registerPlugin(ScrollTrigger);
 

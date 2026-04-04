@@ -1,25 +1,45 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { skillCategories } from '../../data/skills';
 import TechChip from '../ui/TechChip';
+import NeuralNetworkMini from '../ui/NeuralNetworkMini';
 import SceneContainer from '../three/SceneContainer';
 import WireframeCube from '../three/WireframeCube';
 import WireframeTorus from '../three/WireframeTorus';
 import WireframeOctahedron from '../three/WireframeOctahedron';
+import SceneLights from '../three/SceneLights';
+import useTextReveal from '../../hooks/useTextReveal';
 import '../../assets/styles/Expertise.scss';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const geometryMap: Record<string, React.ReactNode> = {
-  cube: <WireframeCube />,
-  torus: <WireframeTorus />,
-  octahedron: <WireframeOctahedron />,
-  doubleHelix: <WireframeOctahedron />, // Reuse octahedron for now
-};
+// GeometryScene renders inside a <Canvas> (R3F context), so Three.js JSX is valid here.
+function GeometryScene({
+  geometry,
+  speedMultiplier,
+}: {
+  readonly geometry: string;
+  readonly speedMultiplier: number;
+}) {
+  return (
+    <>
+      <SceneLights />
+      {geometry === 'cube' && <WireframeCube speedMultiplier={speedMultiplier} />}
+      {geometry === 'torus' && <WireframeTorus speedMultiplier={speedMultiplier} />}
+      {geometry !== 'cube' && geometry !== 'torus' && (
+        <WireframeOctahedron speedMultiplier={speedMultiplier} />
+      )}
+    </>
+  );
+}
 
 export default function Expertise() {
   const sectionRef = useRef<HTMLElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const [hoveredCard, setHoveredCard] = useState<string | null>(null);
+
+  useTextReveal(titleRef);
 
   useEffect(() => {
     if (!sectionRef.current) return;
@@ -53,28 +73,49 @@ export default function Expertise() {
 
   return (
     <section id="expertise" className="expertise" ref={sectionRef}>
-      <h2 className="section-title gradient-text">Expertise</h2>
+      <h2 ref={titleRef} className="section-title gradient-text">Expertise</h2>
       <div className="expertise-grid">
-        {skillCategories.map((category) => (
-          <div key={category.id} className="skill-card">
-            <div className="skill-card-header">
-              <h3 className="skill-card-title">{category.title}</h3>
-              <SceneContainer
-                className="skill-card-3d"
-                camera={{ position: [0, 0, 3], fov: 50 }}
-              >
-                <ambientLight intensity={0.5} />
-                {geometryMap[category.geometry]}
-              </SceneContainer>
-            </div>
-            <p className="skill-card-description">{category.description}</p>
-            <div className="skill-card-chips">
-              {category.technologies.map((tech) => (
-                <TechChip key={tech} label={tech} />
-              ))}
-            </div>
-          </div>
-        ))}
+        {skillCategories.map((category) => {
+          const isHovered = hoveredCard === category.id;
+          // Encode geometry variant as a data attribute so CSS applies the right glow color
+          const colorVariant =
+            category.geometry === 'torus' || category.geometry === 'doubleHelix'
+              ? 'purple'
+              : 'blue';
+
+          return (
+            <article
+              key={category.id}
+              className={`skill-card${isHovered ? ' skill-card--hovered' : ''}`}
+              data-glow={colorVariant}
+              onMouseEnter={() => setHoveredCard(category.id)}
+              onMouseLeave={() => setHoveredCard(null)}
+            >
+              <div className="skill-card-header">
+                <h3 className="skill-card-title">{category.title}</h3>
+                <div className="skill-card-3d-wrapper">
+                  <div className="skill-card-particle-ring" />
+                  <SceneContainer
+                    className="skill-card-3d"
+                    camera={{ position: [0, 0, 3], fov: 50 }}
+                  >
+                    <GeometryScene
+                      geometry={category.geometry}
+                      speedMultiplier={isHovered ? 3 : 1}
+                    />
+                  </SceneContainer>
+                </div>
+              </div>
+              <p className="skill-card-description">{category.description}</p>
+              {category.id === 'ai-ml' && <NeuralNetworkMini />}
+              <div className="skill-card-chips">
+                {category.technologies.map((tech) => (
+                  <TechChip key={tech} label={tech} />
+                ))}
+              </div>
+            </article>
+          );
+        })}
       </div>
     </section>
   );

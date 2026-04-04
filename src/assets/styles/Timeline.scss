@@ -85,6 +85,50 @@
     }
   }
 
+  // AI badge — pulsing dot + label for AI-related sub-projects
+  .ai-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    background: rgba(102, 126, 234, 0.18);
+    border: 1px solid rgba(160, 180, 255, 0.4);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    // #b0c0ff on dark bg achieves ~4.6:1 contrast ratio
+    color: #b0c0ff;
+    text-transform: uppercase;
+    flex-shrink: 0;
+
+    .light-mode & {
+      background: rgba(102, 126, 234, 0.1);
+      border-color: rgba(102, 126, 234, 0.35);
+      // #1e2f8a on near-white bg achieves > 7:1 contrast ratio
+      color: #1e2f8a;
+
+      .ai-badge-dot {
+        background: #1e2f8a;
+        box-shadow: 0 0 6px rgba(30, 47, 138, 0.7);
+      }
+    }
+
+    .ai-badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #b0c0ff;
+      box-shadow: 0 0 6px rgba(176, 192, 255, 0.8);
+      animation: ai-pulse 1.6s ease-in-out infinite;
+    }
+  }
+
+  @keyframes ai-pulse {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.45; }
+  }
+
   .timeline-card {
     @include glass-card;
     padding: 24px;
@@ -169,6 +213,16 @@
           font-weight: 600;
           font-size: 0.9rem;
           margin-bottom: 6px;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+        }
+
+        .sub-project-chips {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 6px;
+          margin-bottom: 8px;
         }
 
         .sub-project-accomplishments {

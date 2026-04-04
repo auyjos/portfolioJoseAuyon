@@ -8,6 +8,7 @@ import Timeline from './components/sections/Timeline';
 import Projects from './components/sections/Projects';
 import Certificates from './components/sections/Certificates';
 import Footer from './components/layout/Footer';
+import CustomCursor from './components/ui/CustomCursor';
 import './assets/styles/index.scss';
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
 
   return (
     <ScrollProvider>
+      <CustomCursor />
       <div className={`main-container ${mode === 'dark' ? 'dark-mode' : 'light-mode'}`}>
         <Navigation mode={mode} onModeChange={handleModeChange} />
         <DotNav />

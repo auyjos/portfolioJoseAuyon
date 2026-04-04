@@ -18,6 +18,14 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+
+  @media (pointer: fine) {
+    cursor: none;
+
+    a, button, [role="button"], input, textarea, select {
+      cursor: none;
+    }
+  }
 }
 
 .dark-mode {
