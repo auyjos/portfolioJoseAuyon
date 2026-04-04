@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(bash \"C:\\\\Users\\\\Admin\\\\.claude\\\\plugins\\\\cache\\\\claude-plugins-official\\\\superpowers\\\\5.0.7\\\\scripts\\\\start-server.sh\" --project-dir \"d:\\\\Personal\\\\portfolioJoseAuyon\")",
+      "Bash(bash \"C:/Users/Admin/.claude/plugins/cache/claude-plugins-official/superpowers/5.0.7/skills/brainstorming/scripts/start-server.sh\" --project-dir \"d:/Personal/portfolioJoseAuyon\")",
+      "WebFetch(domain:fluid.glass)",
+      "WebFetch(domain:animejs.com)",
+      "WebFetch(domain:zentry.com)",
+      "Bash(npm install:*)",
+      "Bash(node -e \"const pkg = require\\('./package.json'\\); console.log\\('sass:', pkg.dependencies?.sass || pkg.devDependencies?.sass\\)\")",
+      "Bash(npx tsc:*)",
+      "Bash(timeout 30 npx vite build)",
+      "Bash(git add:*)",
+      "Bash(git commit -m ':*)",
+      "Bash(npx vite:*)",
+      "Bash(ls -la *.config.* *.json)"
+    ]
+  }
+}
