@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { createTimeline } from 'animejs';
+import { gsap } from 'gsap';
 import { certificates } from '../../data/certificates';
 import CategoryBadge from '../ui/CategoryBadge';
 import SceneContainer from '../three/SceneContainer';
@@ -49,15 +49,18 @@ function Certificates() {
           .forEach((entry) => {
             const el = entry.target as HTMLElement;
 
-            createTimeline()
-              .add(el, {
-                opacity: [0, 1],
-                translateY: [30, 0],
-                rotateX: [15, 0],
-                easing: 'easeOutExpo',
-                duration: 800,
-              })
-              .then(() => observer.unobserve(el));
+            gsap.fromTo(
+              el,
+              { opacity: 0, y: 30, rotateX: 15 },
+              {
+                opacity: 1,
+                y: 0,
+                rotateX: 0,
+                duration: 0.8,
+                ease: 'expo.out',
+                onComplete: () => observer.unobserve(el),
+              }
+            );
           });
       },
       { threshold: 0.15, rootMargin: '0px 0px -10% 0px' }
