@@ -25,6 +25,7 @@ function MagneticLink({ children, className, ...props }: Readonly<React.AnchorHT
 export default function Hero() {
   const contentRef = useRef<HTMLDivElement>(null);
   const mouse = useMousePosition();
+  const videoRef = useRef<HTMLVideoElement>(null);
   const [videoEnded, setVideoEnded] = useState(false);
   const [videoError, setVideoError] = useState(false);
 
@@ -36,6 +37,23 @@ export default function Hero() {
       return () => clearTimeout(t);
     }
   }, [videoError]);
+
+  // Ensure autoplay actually fires — some browsers silently block it.
+  // If the video hasn't started within 1s, try play() programmatically;
+  // if that also fails, treat it as an error and skip to the 3D scene.
+  useEffect(() => {
+    if (videoEnded || videoError) return;
+    const video = videoRef.current;
+    if (!video) return;
+
+    const timer = setTimeout(() => {
+      if (video.paused && !videoEnded) {
+        video.play().catch(() => setVideoError(true));
+      }
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, [videoEnded, videoError]);
 
   // Run entrance animations once the intro video is done (or skipped).
   useEffect(() => {
@@ -81,6 +99,7 @@ export default function Hero() {
       {/* Intro video — plays once then reveals the live 3D scene */}
       {!videoEnded && !videoError && (
         <video
+          ref={videoRef}
           className="hero-video"
           autoPlay
           muted
