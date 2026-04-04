@@ -1,0 +1,128 @@
+@use 'variables' as *;
+
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+
+  .hero-scene {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    padding: 0 10%;
+    max-width: 700px;
+
+    @media (max-width: $bp-mobile) {
+      padding: 120px 5% 60px;
+      max-width: 100%;
+    }
+  }
+
+  .hero-label {
+    font-size: 0.85rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 16px;
+    background: linear-gradient(135deg, $gradient-start, $gradient-end);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    opacity: 0;
+  }
+
+  .hero-name {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+    line-height: 1.1;
+    opacity: 0;
+
+    @media (max-width: $bp-mobile) {
+      font-size: 2.2rem;
+    }
+  }
+
+  .hero-bio {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: $text-dark-secondary;
+    margin-bottom: 32px;
+    max-width: 550px;
+    opacity: 0;
+
+    .light-mode & {
+      color: $text-light-secondary;
+    }
+  }
+
+  .hero-socials {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+    opacity: 0;
+
+    a {
+      color: $text-dark-secondary;
+      font-size: 1.4rem;
+      transition: color $transition-fast, transform $transition-fast;
+
+      &:hover {
+        color: $gradient-start;
+        transform: scale(1.2);
+      }
+
+      .light-mode & {
+        color: $text-light-secondary;
+
+        &:hover {
+          color: $accent;
+        }
+      }
+    }
+  }
+
+  .hero-cv-buttons {
+    display: flex;
+    gap: 12px;
+    opacity: 0;
+
+    a {
+      display: inline-block;
+      padding: 10px 24px;
+      border-radius: 24px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      border: 1px solid $glass-border;
+      color: $text-dark-secondary;
+      background: $glass-bg;
+      backdrop-filter: blur(8px);
+      transition: all $transition-fast;
+
+      &:hover {
+        background: $glass-bg-hover;
+        border-color: $gradient-start;
+        color: $text-dark-primary;
+      }
+
+      .light-mode & {
+        color: $text-light-secondary;
+        border-color: $glass-light-border;
+        background: $glass-light-bg;
+
+        &:hover {
+          border-color: $accent;
+          color: $text-light-primary;
+        }
+      }
+    }
+  }
+}

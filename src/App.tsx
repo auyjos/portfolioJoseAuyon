@@ -2,6 +2,8 @@ import { useState } from 'react';
 import ScrollProvider from './components/layout/ScrollProvider';
 import Navigation from './components/layout/Navigation';
 import DotNav from './components/layout/DotNav';
+import Hero from './components/sections/Hero';
+import Expertise from './components/sections/Expertise';
 import './assets/styles/index.scss';
 
 function App() {
@@ -17,12 +19,8 @@ function App() {
         <Navigation mode={mode} onModeChange={handleModeChange} />
         <DotNav />
         <main>
-          <section id="hero" className="placeholder-section">
-            <h1>Hero Placeholder</h1>
-          </section>
-          <section id="expertise" className="placeholder-section">
-            <h2>Expertise Placeholder</h2>
-          </section>
+          <Hero />
+          <Expertise />
           <section id="history" className="placeholder-section">
             <h2>Timeline Placeholder</h2>
           </section>
