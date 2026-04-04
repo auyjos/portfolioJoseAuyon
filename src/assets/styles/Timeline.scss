@@ -219,6 +219,22 @@
     color: $text-dark-muted;
     .light-mode & { color: $text-light-muted; }
   }
+
+  // Date badge — only visible on mobile (desktop uses the side label)
+  .tl-date-mobile {
+    display: none;
+    padding: 3px 10px;
+    font-size: 0.72rem;
+    border-radius: 10px;
+    background: rgba($gradient-start, 0.15);
+    color: $gradient-start;
+    font-family: $font-mono;
+    margin-bottom: 8px;
+
+    @media (max-width: $bp-mobile) {
+      display: inline-block;
+    }
+  }
 }
 
 /* Mobile-only date badge (shown when the side label is hidden) */

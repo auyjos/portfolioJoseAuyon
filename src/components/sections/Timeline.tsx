@@ -144,6 +144,9 @@ export default function Timeline() {
                 {/* Card */}
                 <div className={`tl-card${isActive ? ' tl-card--active' : ''}`}>
                   <div className="tl-card-header">
+                    <span className="tl-date-mobile">
+                      {entry.startDate} — {entry.endDate}
+                    </span>
                     <h3 className="tl-role">{entry.role}</h3>
                     <span className="tl-company">{entry.company}</span>
                     <span className="tl-location">{entry.location}</span>
